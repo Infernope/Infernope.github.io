@@ -12,11 +12,17 @@ sendBtn.addEventListener("click", () => {
         header.style.display = "none";
     }
 
+    // Switch layout: stretch container + fix input at bottom
+    document.body.style.alignItems = "stretch"; // stop vertical centering
+    const container = document.querySelector(".container");
+    container.style.height = "100vh";
+    container.style.alignItems = "stretch";
+
+     // Show chat box
+     chatBox.style.display = "flex";
+
     // Clear input
     input.value = "";
-
-    const chatBox = document.getElementById("chat-box");
-    chatBox.style.display = "flex";
 
     // Append user message
     const userMsg = document.createElement("div");
