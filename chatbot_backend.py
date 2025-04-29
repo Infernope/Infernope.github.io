@@ -7,31 +7,27 @@ from gradio_client import Client
 app = Flask(__name__)
 CORS(app)
 
-client = Client("yuntian-deng/ChatGPT", httpx_kwargs={"timeout": 60})  # Extended timeout to avoid ReadTimeouts
+client = Client("sudo-soldier/chat", httpx_kwargs={"timeout": 60})  # Extended timeout to avoid ReadTimeouts
 
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
         user_input = request.json.get("message", "")
-        print("🟢 Sending to Hugging Face:", user_input)
+        print("🟢 Sending to Research AI:", user_input)
 
         result = client.predict(
-            inputs=user_input,
-            top_p=1,
-            temperature=1,
-            chat_counter=0,
-            chatbot=[],
-            api_name="/predict"
+            message=user_input,
+            system_message="You are a Chatbot that is an expert on the platform Notion.",  # You can customize this system message
+            max_tokens=512,
+            temperature=0.7,
+            top_p=0.95,
+            api_name="/chat"
         )
 
-        print("🧾 Raw API result:", result)  # 👈 THIS SHOWS YOU THE STRUCTURE
+        print("🧾 Raw API result:", result)  # New API returns a simple string
 
-        # Try to extract if it's structured as expected
-        try:
-            reply = result[0][-1][1]
-        except Exception as parse_error:
-            print("❌ Failed to parse response:", parse_error)
-            reply = f"⚠️ Unexpected API format: {result}"
+        # No need for complex parsing now
+        reply = result
 
         return jsonify({ "reply": reply })
 
