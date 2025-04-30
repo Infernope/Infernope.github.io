@@ -7,7 +7,7 @@ from gradio_client import Client
 app = Flask(__name__)
 CORS(app)
 
-client = Client("sudo-soldier/chat", httpx_kwargs={"timeout": 60})  # Extended timeout to avoid ReadTimeouts
+client = Client("sudo-soldier/chat", httpx_kwargs={"timeout": 120})  # Extended timeout to avoid ReadTimeouts
 
 @app.route("/chat", methods=["POST"])
 def chat():
