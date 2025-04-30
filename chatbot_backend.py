@@ -17,7 +17,7 @@ def chat():
 
         result = client.predict(
             message=user_input,
-            system_message="You are a Chatbot that is an expert on the platform Notion.",  # You can customize this system message
+            system_message="You are a Chatbot that is an expert on the platform Notion. You give short but insightful answers. You don't ramble on. Most of your answers are 1-2 sentences long",  # You can customize this system message
             max_tokens=512,
             temperature=0.7,
             top_p=0.95,

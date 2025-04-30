@@ -24,7 +24,7 @@ sendBtn.addEventListener("click", () => {
 
   const botMsg = document.createElement("div");
   botMsg.classList.add("message", "bot-message");
-  botMsg.textContent = "Thinking...";
+  botMsg.innerHTML = "Thinking...";
   chatBox.appendChild(botMsg);
   chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: "smooth" });
 
@@ -36,14 +36,22 @@ sendBtn.addEventListener("click", () => {
     .then(res => res.json())
     .then(data => {
       const response = data.reply || "No response from AI.";
-      botMsg.textContent = "";
+
+      // Convert response to safe HTML formatting
+      const formatted = response
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\n/g, "<br>")
+        .replace(/•/g, "&bull;");
+
+      // Typing effect with innerHTML support
       let i = 0;
       const typeChar = () => {
-        if (i < response.length) {
-          botMsg.textContent += response.charAt(i);
-          i++;
+        if (i <= formatted.length) {
+          botMsg.innerHTML = formatted.slice(0, i);
           chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: "smooth" });
-          setTimeout(typeChar, 30);
+          i++;
+          setTimeout(typeChar, 20); // Typing speed
         }
       };
       typeChar();
