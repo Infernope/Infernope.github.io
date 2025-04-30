@@ -28,7 +28,7 @@ sendBtn.addEventListener("click", () => {
   chatBox.appendChild(botMsg);
   chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: "smooth" });
 
-  fetch("http://localhost:3000/chat", {
+  fetch("https://1234abcd.ngrok.io/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message: userText })
