@@ -1,0 +1,7 @@
+faiss-cpu
+numpy
+tiktoken
+openai
+notion-client
+python-dotenv
+re
