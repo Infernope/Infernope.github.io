@@ -23,7 +23,7 @@ function handleSend() {
   input.value = "";
   const botMessageEl = displayMessage("Thinking...", "bot");
 
-  fetch("http://localhost:5000/chat", {
+  fetch("https://d3a3-2401-d006-fc02-8300-307d-fbdd-9cb1-d31e.ngrok-free.app", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message: userText }),
